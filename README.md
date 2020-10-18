@@ -1,5 +1,5 @@
 
-# Análise de clientes por perfil
+# Análise de clientes: +50k or -50k
 
 ``` r
 library(tidyverse)
