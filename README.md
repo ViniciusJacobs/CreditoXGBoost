@@ -2,7 +2,6 @@
 # Análise de clientes: +50k or -50k
 
 ``` r
-library(tidyverse)
 library(tidymodels)
 library(ggplot2)
 library(skimr)
@@ -15,7 +14,7 @@ cores = 5
 base_adult <- read_rds("data/adult.rds")
 ```
 
-## AED
+## Análise exploratória
 
 ``` r
 questionr::freq.na(base_adult)
@@ -225,11 +224,7 @@ base_adult_grid %>% show_best(metric = "roc_auc", n = 5)
 #> 4   250       0.05 roc_auc binary     0.921     5 0.00293 Model02
 #> 5   500       0.1  roc_auc binary     0.921     5 0.00209 Model09
 base_adult_select_best_passo1 <- base_adult_grid %>% select_best(metric = "roc_auc")
-base_adult_select_best_passo1
-#> # A tibble: 1 x 3
-#>   trees learn_rate .config
-#>   <dbl>      <dbl> <chr>  
-#> 1   500       0.05 Model03
+
 ```
 
 ## Buscando os melhores parametros para min\_n() e tree\_depth()
@@ -283,11 +278,7 @@ base_adult_grid %>% show_best(metric = "roc_auc", n = 5)
 #> 4    15          4 roc_auc binary     0.919     5 0.00281 Model07
 #> 5    15          3 roc_auc binary     0.918     5 0.00298 Model06
 base_adult_select_best_passo2 <- base_adult_grid %>% select_best(metric = "roc_auc")
-base_adult_select_best_passo2
-#> # A tibble: 1 x 3
-#>   min_n tree_depth .config
-#>   <dbl>      <dbl> <chr>  
-#> 1     5          4 Model02
+
 ```
 
 \#\#Buscando o melhor parâmetro para loss\_reduction()
@@ -343,11 +334,7 @@ base_adult_grid %>% show_best(metric = "roc_auc", n = 5)
 #> 4           0.25 roc_auc binary     0.923     5 0.00258 Model05
 #> 5           0.45 roc_auc binary     0.923     5 0.00262 Model07
 base_adult_select_best_passo3 <- base_adult_grid %>% select_best(metric = "roc_auc")
-base_adult_select_best_passo3
-#> # A tibble: 1 x 2
-#>   loss_reduction .config
-#>            <dbl> <chr>  
-#> 1           0.05 Model02
+
 ```
 
 ## Buscando os melhores parâmetros para mtry() e sample\_size()
@@ -401,11 +388,7 @@ base_adult_grid %>% show_best(metric = "roc_auc", n = 5)
 #> 4   0.2       1     roc_auc binary     0.924     5 0.00273 Model020
 #> 5   0.5       0.889 roc_auc binary     0.924     5 0.00256 Model048
 base_adult_select_best_passo4 <- base_adult_grid %>% select_best(metric = "roc_auc")
-base_adult_select_best_passo4
-#> # A tibble: 1 x 3
-#>    mtry sample_size .config 
-#>   <dbl>       <dbl> <chr>   
-#> 1   0.3           1 Model030
+
 ```
 
 ## Buscando, agora com os outros parâmetros alinhados, os melhores parametros para trees() e lear\_rate()
@@ -459,38 +442,7 @@ base_adult_grid %>% show_best(metric = "roc_auc", n = 5)
 #> 4   250       0.2  roc_auc binary     0.923     5 0.00231 Model44
 #> 5   500       0.1  roc_auc binary     0.923     5 0.00241 Model38
 base_adult_select_best_passo5 <- base_adult_grid %>% select_best(metric = "roc_auc")
-base_adult_select_best_passo5
-#> # A tibble: 1 x 3
-#>   trees learn_rate .config
-#>   <dbl>      <dbl> <chr>  
-#> 1  1000       0.05 Model32
 
-
-base_adult_select_best_passo1
-#> # A tibble: 1 x 3
-#>   trees learn_rate .config
-#>   <dbl>      <dbl> <chr>  
-#> 1   500       0.05 Model03
-base_adult_select_best_passo2
-#> # A tibble: 1 x 3
-#>   min_n tree_depth .config
-#>   <dbl>      <dbl> <chr>  
-#> 1     5          4 Model02
-base_adult_select_best_passo3
-#> # A tibble: 1 x 2
-#>   loss_reduction .config
-#>            <dbl> <chr>  
-#> 1           0.05 Model02
-base_adult_select_best_passo4
-#> # A tibble: 1 x 3
-#>    mtry sample_size .config 
-#>   <dbl>       <dbl> <chr>   
-#> 1   0.3           1 Model030
-base_adult_select_best_passo5
-#> # A tibble: 1 x 3
-#>   trees learn_rate .config
-#>   <dbl>      <dbl> <chr>  
-#> 1  1000       0.05 Model32
 ```
 
 # Desempenho final
