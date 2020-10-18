@@ -95,7 +95,7 @@ base_adult_recipe <- recipe(resposta ~ ., base_adult_train) %>%
 
 ```
 
-## Validacao cruzada
+## Cross-Validation
 
 ```{r}
 base_adult_resamples <- vfold_cv(base_adult_train, v = 5)
@@ -196,7 +196,7 @@ base_adult_select_best_passo2
 ```
 
 
-Buscando o melhor parâmetro para loss_reduction()
+##Buscando o melhor parâmetro para loss_reduction()
 ```{r}
 base_adult_model <- boost_tree(
   mtry = 0.8,
@@ -236,7 +236,7 @@ base_adult_select_best_passo3
 
 ```
 
-# Buscando os melhores parâmetros para mtry() e sample_size()
+## Buscando os melhores parâmetros para mtry() e sample_size()
 ```{r}
 base_adult_model <- boost_tree(
   mtry = tune(),
@@ -368,8 +368,5 @@ base_adult_last_fit %>%
   autoplot()
 ```
 
-```{r}
-
-```
 
 
