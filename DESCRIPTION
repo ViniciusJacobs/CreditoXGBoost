@@ -16,3 +16,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 URL: https://github.com/ViniciusJacobs/CreditoXGBoost
 BugReports: https://github.com/ViniciusJacobs/CreditoXGBoost/issues
+Depends: 
+    R (>= 2.10)
