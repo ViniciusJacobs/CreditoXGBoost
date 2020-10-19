@@ -449,13 +449,13 @@ base_adult_select_best_passo5 <- base_adult_grid %>% select_best(metric = "roc_a
 
 ``` r
 base_adult_model <- boost_tree(
-  mtry = 0.3,
-  trees = 3000,
-  min_n = 5,
-  tree_depth = 4,
-  loss_reduction = 0.05,
-  learn_rate = 0.01,
-  sample_size = 0.9444444
+  mtry = base_adult_select_best_passo4$mtry,
+  trees = base_adult_select_best_passo5$trees,
+  min_n = base_adult_select_best_passo2$min_n,
+  tree_depth = base_adult_select_best_passo2$tree_depth, 
+  loss_reduction = base_adult_select_best_passo3$loss_reduction, 
+  learn_rate = base_adult_select_best_passo5$learn_rate, 
+  sample_size = base_adult_select_best_passo4$sample_size
 ) %>%
   set_mode("classification") %>%
   set_engine("xgboost", nthread = cores)
