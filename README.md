@@ -70,13 +70,7 @@ base_adult <- base_adult %>%
 
 ``` r
 
-base_adult$workclass <- as.factor(base_adult$workclass)
-base_adult$education <- as.factor(base_adult$education)
-base_adult$marital_status <- as.factor(base_adult$marital_status)
-base_adult$occupation <- as.factor(base_adult$occupation)
-base_adult$relationship <- as.factor(base_adult$relationship)
-base_adult$race <- as.factor(base_adult$race)
-base_adult$sex <- as.factor(base_adult$sex)
+
 
 glimpse(base_adult)
 #> Rows: 32,561
@@ -156,46 +150,17 @@ base_adult_model
 #> 
 #> Computational engine: xgboost
 
+# Criando o Workflow
 
 base_adult_wf <- workflow() %>%
   add_model(base_adult_model) %>%
   add_recipe(base_adult_recipe)
 
-
-
-
+# Grid
 base_adult_grid <- expand.grid(
   learn_rate = c(0.05, 0.1, 0.2, 0.3),
   trees = c(100, 250, 500, 1000, 1500, 2000)
 )
-
-base_adult_grid
-#>    learn_rate trees
-#> 1        0.05   100
-#> 2        0.10   100
-#> 3        0.20   100
-#> 4        0.30   100
-#> 5        0.05   250
-#> 6        0.10   250
-#> 7        0.20   250
-#> 8        0.30   250
-#> 9        0.05   500
-#> 10       0.10   500
-#> 11       0.20   500
-#> 12       0.30   500
-#> 13       0.05  1000
-#> 14       0.10  1000
-#> 15       0.20  1000
-#> 16       0.30  1000
-#> 17       0.05  1500
-#> 18       0.10  1500
-#> 19       0.20  1500
-#> 20       0.30  1500
-#> 21       0.05  2000
-#> 22       0.10  2000
-#> 23       0.20  2000
-#> 24       0.30  2000
-
 
 
 base_adult_grid <- base_adult_wf %>%
@@ -205,8 +170,6 @@ base_adult_grid <- base_adult_wf %>%
     control = control_grid(save_pred = TRUE, verbose = FALSE, allow_par = TRUE),
     metrics = metric_set(roc_auc)
   )
-
-
 
 autoplot(base_adult_grid)
 ```
@@ -316,9 +279,7 @@ base_adult_grid <- base_adult_wf %>%
 
 
 autoplot(base_adult_grid)
-#> Warning: Transformation introduced infinite values in continuous x-axis
 
-#> Warning: Transformation introduced infinite values in continuous x-axis
 ```
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
@@ -471,9 +432,7 @@ base_adult_last_fit <- base_adult_wf %>%
     control = control_grid(save_pred = TRUE, verbose = FALSE, allow_par = TRUE),
     metrics = metric_set(roc_auc, f_meas)
   )
-#> Warning: The `...` are not used in this function but one or more objects were
-#> passed: 'control'
-#> ! Resample1: model (predictions): There are new levels in a factor: Holand-Netherlands
+
 
 
 collect_metrics(base_adult_last_fit)
