@@ -447,11 +447,9 @@ base_adult_last_fit %>%
   pluck(".workflow", 1) %>%
   pull_workflow_fit() %>%
   vip::vip(num_features = 20)
-#> Warning: `as.tibble()` is deprecated as of tibble 2.0.0.
-#> Please use `as_tibble()` instead.
-#> The signature and semantics have changed, see `?as_tibble`.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_warnings()` to see where this warning was generated.
+
+
+# Váriaveis que mais influenciaram o modelo (vip::vip)
 ```
 
 <img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
